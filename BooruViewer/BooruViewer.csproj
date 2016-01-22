@@ -1,0 +1,214 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{D7F32D24-8DA8-499B-B56C-5741CC5DE0C8}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>BooruViewer</RootNamespace>
+    <AssemblyName>BooruViewer .net</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\bin\Debug\Any\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>..\bin\Release\Any\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Xaml">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.XML" />
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Compile Include="Controls\Views\PagesQueue.xaml.cs">
+      <DependentUpon>PagesQueue.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Views\PagesQueueList.xaml.cs">
+      <DependentUpon>PagesQueueList.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\WaitPanel.xaml.cs">
+      <DependentUpon>WaitPanel.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Views\DataItem.cs" />
+    <Compile Include="Settings\PreviewsSettings.xaml.cs">
+      <DependentUpon>PreviewsSettings.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Settings\xSettingsEditor.xaml.cs">
+      <DependentUpon>xSettingsEditor.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Settings\ViewModels\xSettingsEditorVM.cs" />
+    <Compile Include="ViewModels\PageQueueViewModel.cs" />
+    <Compile Include="StaticData.cs" />
+    <Compile Include="ViewModels\DataViewModel.cs" />
+    <Compile Include="SettingsControl.xaml.cs">
+      <DependentUpon>SettingsControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Settings\ViewModels\LoaderSettingsViewModel.cs" />
+    <Compile Include="Settings\LoadersSettings.xaml.cs">
+      <DependentUpon>LoadersSettings.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Settings\Helper.cs" />
+    <Compile Include="Settings\ServersSettings.xaml.cs">
+      <DependentUpon>ServersSettings.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Settings\SettingsCommands.cs" />
+    <Compile Include="Settings\DownloadManagerSettings.xaml.cs">
+      <DependentUpon>DownloadManagerSettings.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Settings\DataContainerSettings.xaml.cs">
+      <DependentUpon>DataContainerSettings.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Settings\ISettingsPage.cs" />
+    <Compile Include="Settings\ViewModels\ServerSettingsViewModel.cs" />
+    <Compile Include="ViewModels\MainViewModel.cs" />
+    <Compile Include="Controls\Views\Commands.cs" />
+    <Compile Include="Controls\Views\List.xaml.cs">
+      <DependentUpon>List.xaml</DependentUpon>
+    </Compile>
+    <Page Include="Controls\Views\PagesQueue.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\Views\PagesQueueList.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\WaitPanel.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MainWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Page Include="Resources\Icons.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="SettingsControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Settings\PreviewsSettings.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Settings\LoadersSettings.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Settings\DownloadManagerSettings.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Settings\DataContainerSettings.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Settings\xSettingsEditor.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Settings\ServersSettings.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\Views\List.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <AppDesigner Include="Properties\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Booru.Base\Booru.Base.csproj">
+      <Project>{7cbae0e3-ac1b-4a32-b048-be529339897a}</Project>
+      <Name>Booru.Base</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Booru.Classes\Booru.Classes.csproj">
+      <Project>{a6dfb1aa-306b-4466-89c3-564cd3eb88e9}</Project>
+      <Name>Booru.Classes</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Booru.Core.Utils\Booru.Core.Utils.csproj">
+      <Project>{e87fe50c-d466-4704-be2e-cbd00b1f526e}</Project>
+      <Name>Booru.Core.Utils</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Booru.Core\Booru.Core.csproj">
+      <Project>{aa1129b4-a763-4d2a-8a7e-6d82ab7033d3}</Project>
+      <Name>Booru.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Booru.Ui\Booru.Ui.csproj">
+      <Project>{d3d6f095-f7fa-4317-9863-b2024dc26495}</Project>
+      <Name>Booru.Ui</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

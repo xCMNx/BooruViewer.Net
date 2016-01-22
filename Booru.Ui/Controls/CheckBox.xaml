@@ -1,0 +1,47 @@
+﻿<CheckBox x:Class="Booru.Ui.CheckBox"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Booru.Ui"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300" x:Name="Root">
+    <CheckBox.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Booru.Ui;component/Styles/ColorScheme.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </CheckBox.Resources>
+    <CheckBox.Template>
+        <ControlTemplate TargetType="CheckBox">
+            <Border x:Name="radioButtonBorder" BorderBrush="{StaticResource CheckBox.Elipse.Border}" BorderThickness="{TemplateBinding BorderThickness}" Background="{DynamicResource CheckBox.Elipse.Background}" CornerRadius="999">
+                <Path x:Name="glyph" Data="{Binding GlyphData, ElementName=Root}" Stretch="Fill" Fill="{DynamicResource CheckBox.Glyph.Color}" Margin="2" Opacity="0.9"/>
+            </Border>
+            <ControlTemplate.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter TargetName="glyph" Property="Opacity" Value="1"/>
+                </Trigger>
+                <Trigger Property="IsEnabled" Value="False">
+                    <Setter TargetName="glyph" Property="Opacity" Value="0.3"/>
+                </Trigger>
+                <Trigger Property="IsChecked" Value="True">
+                    <Trigger.EnterActions>
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <ThicknessAnimation Storyboard.TargetName="glyph" Duration="0:0:0.2" Storyboard.TargetProperty="Margin" To="-2"/>
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </Trigger.EnterActions>
+                    <Trigger.ExitActions>
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <ThicknessAnimation Storyboard.TargetName="glyph" Duration="0:0:0.2" Storyboard.TargetProperty="Margin"/>
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </Trigger.ExitActions>
+                </Trigger>
+            </ControlTemplate.Triggers>
+        </ControlTemplate>
+    </CheckBox.Template>
+</CheckBox>

@@ -1,0 +1,33 @@
+﻿
+	<Application x:Class="BooruViewer.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:conv="clr-namespace:Booru.Ui.Converters;assembly=Booru.Ui"
+             xmlns:ui="clr-namespace:Booru.Ui;assembly=Booru.Ui"
+             xmlns:sys="clr-namespace:System;assembly=mscorlib"
+             Startup="Application_Startup" StartupUri="MainWindow.xaml">
+    <Application.Resources>
+        <ResourceDictionary>
+            <conv:TypeToString x:Key="TypeToString"/>
+            <conv:BoolInvert x:Key="BoolInvert"/>
+            <conv:ObjectExistensToBool x:Key="ObjectExistensToBool"/>
+            <conv:ObjectToVisibility x:Key="ObjectToVisibility" Default="Collapsed"/>
+            <conv:ObjectToVisibility x:Key="ObjectToVisibilityCI" Default="Collapsed" Inverted="true"/>
+            <conv:ObjectToVisibility x:Key="ObjectToVisibilityH" Default="Hidden"/>
+            <conv:BoolToVisibility x:Key="BoolToVisibility"/>
+            <conv:BoolToVisibility x:Key="BoolToVisibilityI" Inverted="true"/>
+
+            <DataTemplate DataType="{x:Type sys:Type}">
+                <TextBlock Text="{Binding Converter={StaticResource TypeToString}}"/>
+            </DataTemplate>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Resources/Icons.xaml"/>
+                <!--<ResourceDictionary Source="/Booru.Ui;component/Themes/generic.xaml"/>-->
+                <!--<ResourceDictionary Source="/Booru.Ui;component/Themes/ExpressionDark.xaml" />
+                <ResourceDictionary Source="/Booru.Ui;component/Resources/ScrollBarTemplate.xaml"/>
+                <ResourceDictionary Source="/Booru.Ui;component/Resources/ColorScheme.xaml"/>-->
+            </ResourceDictionary.MergedDictionaries>
+
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>

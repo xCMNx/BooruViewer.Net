@@ -1,0 +1,14 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:local="clr-namespace:Booru.Ui">
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="pack://application:,,,/Booru.Ui;component/Styles/ColorScheme.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/Booru.Ui;component/Styles/GlyphButtonDefaultStyle.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/Booru.Ui;component/Styles/TileViewDefaultStyle.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/Booru.Ui;component/Styles/GaleryViewDefaultStyle.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/Booru.Ui;component/Styles/NumericUpDowndefaltStyle.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/Booru.Ui;component/Styles/RotaitingPathDefaultStyle.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/Booru.Ui;component/Styles/ComboBoxStyle.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/Booru.Ui;component/Styles/TextBoxStyle.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/Booru.Ui;component/Styles/ScrollBarTemplate.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/Booru.Ui;component/Styles/ButtonStyle.xaml" />
+    </ResourceDictionary.MergedDictionaries>
+</ResourceDictionary>

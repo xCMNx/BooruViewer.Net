@@ -1,0 +1,85 @@
+﻿<UserControl x:Class="BooruViewer.Views.List"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:BooruViewer.Views"
+             xmlns:static="clr-namespace:BooruViewer"
+             xmlns:ctrl="clr-namespace:BooruViewer.Controls"
+             xmlns:ui="clr-namespace:Booru.Ui;assembly=Booru.Ui"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <GridView x:Key="Grid">
+                <GridView.ColumnHeaderContainerStyle>
+                    <Style TargetType="{x:Type GridViewColumnHeader}">
+                        <Setter Property="Background" Value="{DynamicResource Button.Background}"/>
+                        <Setter Property="BorderBrush" Value="{DynamicResource Window.Foreground}"/>
+                        <Setter Property="Foreground" Value="{DynamicResource Window.Foreground}"/>
+                    </Style>
+                </GridView.ColumnHeaderContainerStyle>
+                <GridView.Columns>
+                    <GridViewColumn Header="Id" DisplayMemberBinding="{Binding Id}"/>
+                    <GridViewColumn Header="Md5" DisplayMemberBinding="{Binding Md5}"/>
+                    <GridViewColumn Header="Tags" DisplayMemberBinding="{Binding Tags}"/>
+                </GridView.Columns>
+            </GridView>
+
+            <DataTemplate x:Key="mainTile">
+                <ContentPresenter Content="{Binding Preview}" ToolTip="{Binding Tags}">
+                    <ContentPresenter.Resources/>
+                </ContentPresenter>
+            </DataTemplate>
+
+            <DataTemplate x:Key="centralTile">
+                <ContentPresenter x:Name="centralTile" Margin="3" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Content="{Binding}" ContentTemplate="{StaticResource mainTile}"/>
+            </DataTemplate>
+
+            <ui:TileView x:Key="Tile" ItemWidth="150" ItemHeight="150" ItemTemplate="{StaticResource centralTile}"/>
+
+            <DataTemplate x:Key="galeryTile">
+                <ContentPresenter Width="100" Height="100" Margin="3" Content="{Binding}" ContentTemplate="{StaticResource mainTile}"/>
+            </DataTemplate>
+
+            <ui:GaleryView x:Key="Galery" ItemTemplate="{StaticResource galeryTile}">
+                <ui:GaleryView.ViewTemplate>
+                    <DataTemplate>
+                        <ListBox ItemsSource="{Binding}"/>
+                    </DataTemplate>
+                </ui:GaleryView.ViewTemplate>
+            </ui:GaleryView>
+
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <Grid DataContext="{x:Static static:StaticData.DataViewModel}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <TextBox x:Name="Filter" Grid.Column="0" KeyDown="Filter_KeyDown" IsEnabled="{Binding SearchCommand.IsExecuting, Converter={StaticResource BoolInvert}}"/>
+            <StackPanel Grid.Column="1" Height="20" Orientation="Horizontal">
+                <Label ToolTip="{Binding Statistics}" Padding="2" HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <Path Fill="{Binding Foreground, RelativeSource={RelativeSource AncestorType=Label}}" Stretch="Uniform" Data="M34.582565,24.378L35.156269,24.768593C34.934867,27.40314,34.824869,30.749575,34.824869,34.806793L34.824869,41.619658C34.824869,42.06315 34.865366,43.485722 34.944667,45.885977 35.026069,48.286928 35.111271,49.688702 35.201168,50.091492 35.293069,50.491985 35.427073,50.785078 35.608073,50.963877 35.789075,51.144972 36.011076,51.26157 36.271477,51.312368 36.53388,51.363169 37.617887,51.448368 39.526797,51.568266L39.799001,51.808258 39.799001,54.620203 39.5573,54.890999C37.044282,54.730301 34.623066,54.650805 32.293549,54.650805 29.980434,54.650805 27.569619,54.730301 25.057203,54.890999L24.786401,54.620203 24.786401,51.808258 25.057203,51.568266C27.005815,51.448368 28.106723,51.357267 28.359425,51.296068 28.609427,51.236771 28.831427,51.110571 29.022128,50.919676 29.211529,50.72838 29.343631,50.437286 29.412731,50.046795 29.484332,49.654102 29.565833,48.357929 29.654833,46.15687 29.746733,43.957613 29.789034,42.293547 29.789034,41.168667L29.789034,35.229987C29.789034,34.4258 29.750634,33.329622 29.669233,31.944251 29.589831,30.556879 29.524731,29.703895 29.473933,29.382401 29.423132,29.061507 29.266129,28.823213 29.005828,28.674716 28.745427,28.521818 28.222623,28.44692 27.439418,28.44692L24.9062,28.41832 24.636,28.175925 24.636,26.880551 24.876301,26.638356C28.714826,26.175965,31.949848,25.42358,34.582565,24.378z M32.021249,10.903001C32.96539,10.903001 33.768725,11.234581 34.432255,11.897742 35.094984,12.561303 35.426998,13.364455 35.426998,14.308399 35.426998,15.234344 35.094984,16.027898 34.432255,16.691258 33.768725,17.35392 32.96539,17.684 32.021249,17.684 31.097408,17.684 30.297973,17.358319 29.624044,16.704958 28.950814,16.051996 28.614999,15.254443 28.615,14.308399 28.614999,13.364455 28.950814,12.561303 29.624044,11.897742 30.297973,11.234581 31.097408,10.903001 32.021249,10.903001z M5.3347149,5.3346214L5.3347149,61.334364 57.778273,61.334364 57.778273,5.3346214z M5.3347149,0L57.778273,0C60.724287,0,63.112997,2.3886852,63.112997,5.3346214L63.112997,61.334364C63.112997,64.278383,60.724287,66.666998,57.778273,66.666998L5.3347149,66.666998C2.3886509,66.666998,0,64.278383,0,61.334364L0,5.3346214C0,2.3886852,2.3886509,0,5.3347149,0z"/>
+                </Label>
+                <ui:GlyphButton Margin="2" Command="{Binding SearchCommand}" CommandParameter="{Binding Text, ElementName=Filter}" GlyphData="M2.1299944,9.9798575L55.945994,9.9798575 35.197562,34.081179 35.197562,62.672859 23.428433,55.942383 23.428433,33.52121z M1.3001332,0L56.635813,0C57.355887,0,57.935946,0.5891428,57.935946,1.3080959L57.935946,2.8258877C57.935946,3.5448422,57.355887,4.133985,56.635813,4.133985L1.3001332,4.133985C0.58005941,4.133985,-2.3841858E-07,3.5448422,0,2.8258877L0,1.3080959C-2.3841858E-07,0.5891428,0.58005941,0,1.3001332,0z"/>
+                <ui:GlyphButton Margin="2" Click="GlyphButton_Click" GlyphData="M3.5234711,42.273001L52.841671,42.273001C54.779186,42.273001,56.365002,43.860291,56.365002,45.7953L56.365002,52.841398C56.365002,54.779009,54.779186,56.365,52.841671,56.365L3.5234711,56.365C1.5860441,56.365,0,54.779009,0,52.841398L0,45.7953C0,43.860291,1.5860441,42.273001,3.5234711,42.273001z M3.5234711,21.136999L52.841675,21.136999C54.77919,21.136999,56.365002,22.724289,56.365002,24.660475L56.365002,31.704525C56.365002,33.64221,54.77919,35.227999,52.841675,35.227999L3.5234711,35.227999C1.5860442,35.227999,0,33.64221,0,31.704525L0,24.660475C0,22.724289,1.5860442,21.136999,3.5234711,21.136999z M3.5234711,0L52.841671,0C54.779186,0,56.365002,1.5872574,56.365002,3.5233898L56.365002,10.56885C56.365002,12.504922,54.779186,14.090999,52.841671,14.091L3.5234711,14.091C1.5860441,14.090999,0,12.504922,0,10.56885L0,3.5233898C0,1.5872574,1.5860441,0,3.5234711,0z"/>
+                <ui:GlyphButton Margin="2" Click="GlyphButton_Click_1" GlyphData="M18.7045,15.023C20.156179,15.023 21.333,16.200222 21.333,17.65215 21.333,19.103878 20.156179,20.281 18.7045,20.281 17.252821,20.281 16.076001,19.103878 16.076001,17.65215 16.076001,16.200222 17.252821,15.023 18.7045,15.023z M10.66701,15.023C12.11886,15.023 13.296,16.200222 13.296,17.65215 13.296,19.103878 12.11886,20.281 10.66701,20.281 9.2151008,20.281 8.0380001,19.103878 8.0380001,17.65215 8.0380001,16.200222 9.2151008,15.023 10.66701,15.023z M2.6290054,15.023C4.0808973,15.023 5.2580004,16.200222 5.2580004,17.65215 5.2580004,19.103878 4.0808973,20.281 2.6290054,20.281 1.1771631,20.281 0,19.103878 0,17.65215 0,16.200222 1.1771631,15.023 2.6290054,15.023z M18.7045,7.5120004C20.156179,7.5120006 21.333,8.6891696 21.333,10.141091 21.333,11.592951 20.156179,12.770001 18.7045,12.770001 17.252821,12.770001 16.076,11.592951 16.076,10.141091 16.076,8.6891696 17.252821,7.5120006 18.7045,7.5120004z M10.66701,7.5119998C12.11886,7.5119999 13.296,8.6891693 13.296,10.14109 13.296,11.592951 12.11886,12.77 10.66701,12.77 9.2151008,12.77 8.0380001,11.592951 8.0380001,10.14109 8.0380001,8.6891693 9.2151008,7.5119999 10.66701,7.5119998z M2.6290054,7.5119998C4.0808973,7.5119999 5.2580004,8.6891693 5.2580004,10.14109 5.2580004,11.592951 4.0808973,12.77 2.6290054,12.77 1.1771631,12.77 0,11.592951 0,10.14109 0,8.6891693 1.1771631,7.5119999 2.6290054,7.5119998z M18.7045,0C20.156179,0 21.333,1.1771359 21.333,2.6289454 21.333,4.0807445 20.156179,5.2580004 18.7045,5.2580004 17.252821,5.2580004 16.076001,4.0807445 16.076001,2.6289454 16.076001,1.1771359 17.252821,0 18.7045,0z M10.66701,0C12.11886,0 13.296,1.1771359 13.296,2.6289454 13.296,4.0807445 12.11886,5.2580004 10.66701,5.2580004 9.2151008,5.2580004 8.0380001,4.0807445 8.0380001,2.6289454 8.0380001,1.1771359 9.2151008,0 10.66701,0z M2.6290054,0C4.0808973,0 5.2580004,1.1771359 5.2580004,2.6289454 5.2580004,4.0807445 4.0808973,5.2580004 2.6290054,5.2580004 1.1771631,5.2580004 0,4.0807445 0,2.6289454 0,1.1771359 1.1771631,0 2.6290054,0z"/>
+                <ui:GlyphButton Margin="2" Click="GlyphButton_Click_2" GlyphData="m 0,12.788 9.4239998,0 0,9.424 L 0,22.212 Z m 12.789,0 9.421999,0 0,9.424 -9.421999,0 z m 12.788999,0 9.422,0 0,9.424 -9.422,0 z M 0,-12.788 l 35,0 0,22.028933 -35,0 z"/>
+            </StackPanel>
+        </Grid>
+        <ListView x:Name="LV" ItemsSource="{Binding Data}" View="{StaticResource Grid}" VirtualizingStackPanel.CleanUpVirtualizedItem="LV_CleanUpVirtualizedItem" Grid.Row="1"/>
+
+        <Grid Visibility="{Binding SearchCommand.IsExecuting, Converter={StaticResource BoolToVisibility}}" Grid.RowSpan="2">
+            <Border Background="{Binding Background, RelativeSource={RelativeSource AncestorType=Window}}" Opacity="0.6"/>
+            <ctrl:WaitPanel Width="100" Height="100">
+                <Path Fill="{Binding Foreground, RelativeSource={RelativeSource AncestorType=ctrl:WaitPanel}}" Data="M2.1299944,9.9798575L55.945994,9.9798575 35.197562,34.081179 35.197562,62.672859 23.428433,55.942383 23.428433,33.52121z M1.3001332,0L56.635813,0C57.355887,0,57.935946,0.5891428,57.935946,1.3080959L57.935946,2.8258877C57.935946,3.5448422,57.355887,4.133985,56.635813,4.133985L1.3001332,4.133985C0.58005941,4.133985,-2.3841858E-07,3.5448422,0,2.8258877L0,1.3080959C-2.3841858E-07,0.5891428,0.58005941,0,1.3001332,0z"/>
+            </ctrl:WaitPanel>
+        </Grid>
+    </Grid>
+</UserControl>

@@ -1,0 +1,53 @@
+﻿<Label x:Class="BooruViewer.Controls.WaitPanel"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:BooruViewer.Controls"
+             mc:Ignorable="d" 
+             d:DesignHeight="45.306" d:DesignWidth="287.143" x:Name="root">
+    <Label.Resources>
+        <Style TargetType="Path" x:Key="main">
+            <Setter Property="Fill" Value="{Binding Foreground, RelativeSource={RelativeSource AncestorType=Label}}"/>
+            <Setter Property="Stretch" Value="Uniform"/>
+        </Style>
+        <Style TargetType="Path" BasedOn="{StaticResource main}"/>
+        <Style TargetType="Path" x:Key="progress" BasedOn="{StaticResource main}">
+            <Setter Property="RenderTransformOrigin" Value="0.5,0.5"/>
+            <Setter Property="RenderTransform">
+                <Setter.Value>
+                    <RotateTransform/>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <EventTrigger RoutedEvent="Loaded">
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <DoubleAnimation Storyboard.TargetProperty="(Rectangle.RenderTransform).(RotateTransform.Angle)" To="360" Duration="0:0:5" RepeatBehavior="Forever"/>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+            </Style.Triggers>
+        </Style>
+    </Label.Resources>
+    <Label.Template>
+        <ControlTemplate TargetType="{x:Type Label}">
+            <Grid>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <ContentPresenter Grid.Column="1" Grid.Row="1" HorizontalAlignment="Center" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="Center"/>
+                </Grid>
+                <Path Style="{StaticResource progress}" Visibility="{Binding Visibility, ElementName=root}" Data="M340.896 58.488C303.18 20.771 253.033 0 199.694 0C146.353 0 96.207 20.771 58.491 58.488   C20.772 96.206 0 146.354 0 199.693c0 53.342 20.772 103.489 58.491 141.206c37.716 37.717 87.863 58.488 141.203 58.488   c53.337 0 103.486-20.771 141.203-58.488c37.719-37.718 58.49-87.865 58.49-141.206C399.387 146.355 378.615 96.207 340.896 58.488   z M199.694 77.457c67.402 0 122.236 54.835 122.236 122.236s-54.834 122.236-122.236 122.236S77.457 267.094 77.457 199.693   S132.292 77.457 199.694 77.457z M328.061 328.062c-34.289 34.287-79.877 53.17-128.367 53.17   c-48.491 0-94.079-18.883-128.367-53.17c-34.289-34.287-53.173-79.877-53.173-128.37h41.148   c0 77.411 62.979 140.391 140.392 140.391c77.412 0 140.39-62.979 140.39-140.391c0-77.412-62.979-140.391-140.39-140.391   c-4.594 0-9.134 0.229-13.615 0.662v-41.31c4.508-0.332 9.049-0.5 13.615-0.5c48.49 0 94.078 18.883 128.367 53.171   c34.289 34.289 53.172 79.878 53.172 128.368C381.232 248.186 362.35 293.775 328.061 328.062z"/>
+            </Grid>
+        </ControlTemplate>
+    </Label.Template>
+</Label>

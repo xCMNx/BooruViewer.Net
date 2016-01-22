@@ -1,0 +1,73 @@
+﻿<Grid x:Class="BooruViewer.SettingsControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:BooruViewer"
+             xmlns:cmd="clr-namespace:BooruViewer.Settings"
+			xmlns:ui="clr-namespace:Booru.Ui;assembly=Booru.Ui"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="600" Background="{Binding Background, RelativeSource={RelativeSource AncestorType=Window}}">
+    <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="250"/>
+        <ColumnDefinition Width="*"/>
+    </Grid.ColumnDefinitions>
+    <ScrollViewer Grid.Row="0">
+        <StackPanel Background="#33000000">
+            <StackPanel.Resources>
+                <Style TargetType="TextBlock">
+                    <Setter Property="TextBlock.TextWrapping" Value="Wrap"/>
+                    <Setter Property="FontWeight" Value="Bold"/>
+                    <Setter Property="Foreground" Value="{Binding Foreground, RelativeSource={RelativeSource AncestorType=ui:RadioButton}}"/>
+                </Style>
+                <Style TargetType="ui:RadioButton">
+                    <Setter Property="FontSize" Value="18"/>
+                    <Setter Property="GlyphSize" Value="40"/>
+                    <Setter Property="VerticalContentAlignment" Value="Center"/>
+                    <Setter Property="Command" Value="{Binding Source={x:Static cmd:SettingsCommands.OpenMenu}}"/>
+                </Style>
+            </StackPanel.Resources>
+            <ui:RadioButton x:Name="DataContainer" GlyphMargin="5" GlyphData="{StaticResource icoDatabase_Data}" CommandParameter="DC">
+                <TextBlock>Data container</TextBlock>
+            </ui:RadioButton>
+            <ui:RadioButton x:Name="DownloadManager" GlyphMargin="5,5,2,0" GlyphData="{StaticResource icoLoadManager_Data}" CommandParameter="DM">
+                <TextBlock>Download manager</TextBlock>
+            </ui:RadioButton>
+            <ui:RadioButton x:Name="Servers" GlyphMargin="6" GlyphData="{StaticResource icoDownloadItems_Data}" CommandParameter="S">
+                <TextBlock>Servers</TextBlock>
+            </ui:RadioButton>
+            <ui:RadioButton x:Name="Previews" GlyphMargin="6,6,6,3" GlyphData="{StaticResource icoPreview_Data}" CommandParameter="P">
+                <TextBlock>Previews</TextBlock>
+            </ui:RadioButton>
+        </StackPanel>
+    </ScrollViewer>
+    <Grid Grid.Column="1">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Border x:Name="ElementView" Grid.Row="0"/>
+        <Border Background="#33000000" Grid.Row="1"/>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Height="Auto" Grid.Row="1">
+            <StackPanel.Resources>
+                <ResourceDictionary>
+                    <Style TargetType="Button">
+                        <Setter Property="Margin" Value="2"/>
+                        <Setter Property="ToolTip" Value="{Binding RelativeSource={RelativeSource Mode=Self}, Path=Command.Text}"/>
+                    </Style>
+                </ResourceDictionary>
+            </StackPanel.Resources>
+            <Button Command="{Binding Source={x:Static cmd:SettingsCommands.Apply}}" Margin="2" Width="30" Height="30" ToolTip="{Binding RelativeSource={RelativeSource Mode=Self}, Path=Command.Text}">
+                <Polygon Stretch="Uniform" Fill="{Binding Foreground, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Button}}" Points="118.862,309.071 342.357,85.606 290.04,33.286 118.861,204.427 52.32,137.907 0,190.226 "/>
+            </Button>
+            <ui:GlyphButton Padding="2" Command="{Binding Source={x:Static cmd:SettingsCommands.Reset}}" Width="30" Height="30" ToolTip="{Binding RelativeSource={RelativeSource Mode=Self}, Path=Command.Text}"
+                GlyphData="M161.6788,0C194.72511,1.2265518E-06 225.75655,15.601127 249.08913,43.892995 272.43511,72.129502 285.30498,109.75885 285.30498,149.76606 285.30498,164.07281 283.562,178.11065 280.33891,191.49999L239.98166,191.49999C244.7115,178.48763 247.27028,164.39706 247.27028,149.76606 247.27028,122.06998 238.36791,96.045251 222.17241,76.447625 206.03037,56.849996 184.53888,46.104779 161.6788,46.104779 138.8098,46.104779 117.31831,56.849996 101.15846,76.447625 89.180124,90.970536 81.227258,109.05762 77.883844,128.71061L118.88302,184.31895 0,184.31895 9.4953277,35.95535 48.706953,89.083009C54.783022,72.453759 63.302099,57.11889 74.264047,43.892995 97.59662,15.601127 128.6503,1.2265518E-06 161.6788,0z"/>
+            <!--
+            <Button Command="{Binding Source={x:Static cmd:SettingsCommands.Close}}" Width="30" Height="30" ToolTip="{Binding RelativeSource={RelativeSource Mode=Self}, Path=Command.Text}">
+                <Path Stretch="Fill" Fill="{Binding Foreground, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Button}}" Data="M350.676 261.501c7.388 7.389 7.388 19.365 0.001 26.754l-62.421 62.421c-7.39 7.389-19.366 7.387-26.755 0l-83.392-83.394   l-83.395 83.394c-7.386 7.388-19.364 7.387-26.752 0L5.541 288.254c-7.388-7.388-7.387-19.364 0.001-26.75l83.395-83.395   L5.543 94.715c-7.387-7.387-7.387-19.365-0.001-26.751L67.965 5.542c7.387-7.388 19.365-7.387 26.75 0l83.395 83.395l83.393-83.395   c7.388-7.387 19.364-7.388 26.753 0l62.422 62.421c7.387 7.388 7.388 19.366 0 26.753l-83.395 83.393L350.676 261.501z"/>
+            </Button>
+            -->
+        </StackPanel>
+
+    </Grid>
+</Grid>

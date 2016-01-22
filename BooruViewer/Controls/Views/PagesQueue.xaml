@@ -1,0 +1,41 @@
+﻿<UserControl x:Class="BooruViewer.Views.PagesQueue"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:BooruViewer.Controls.Views"
+             xmlns:vm="clr-namespace:BooruViewer"
+             xmlns:base="clr-namespace:Booru.Base;assembly=Booru.Base"
+             xmlns:settings="clr-namespace:BooruViewer.Settings"
+             xmlns:ui="clr-namespace:Booru.Ui;assembly=Booru.Ui"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+    <Grid>
+        <Grid.DataContext>
+            <vm:PageQueueViewModel/>
+        </Grid.DataContext>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="60*"/>
+                <ColumnDefinition Width="40*"/>
+                <ColumnDefinition Width="30"/>
+            </Grid.ColumnDefinitions>
+            <TextBlock Text="Tags:" VerticalAlignment="Center" Grid.Column="0"/>
+            <TextBox x:Name="Tags" Text="{Binding Tags}" Grid.Column="1"/>
+            <ComboBox x:Name="Servers" SelectedItem="{Binding SelectedServer,Mode=TwoWay}" ItemsSource="{Binding Source={x:Static base:Templates.List}}" DisplayMemberPath="Server" SelectedValuePath="Server" Grid.Column="2"/>
+            <ui:GlyphButton 
+                GlyphData="M24.721001,22.26L30.388,22.26 30.388,42.415365 30.91054,41.892509 40.805002,32 40.805002,40.579021 32.085034,49.296741 32.013435,49.370941 32.048534,49.40904 27.760752,53.699001 23.469168,49.40904 14.753001,40.69132 14.753001,32.1113 24.643563,42.006708 24.721001,42.083981z M22.157601,5.3964806L21.794301,17.168C21.794301,17.168,21.324201,24.9512,12.747401,24.0117L5.3958702,23.812501 5.3958702,57.253901C5.3958702,57.997999,6.0026207,58.602499,6.7474403,58.602499L44.531301,58.602499C45.273401,58.602499,45.880201,57.997999,45.880201,57.253901L45.880201,6.7460899C45.880201,6.0039101,45.273401,5.3964806,44.531301,5.3964806z M21.804701,0L44.531301,0C48.257801,0,51.280003,3.0214806,51.280003,6.7460899L51.280003,57.253901C51.280003,60.980501,48.257801,64.000002,44.531301,64.000002L6.7474403,64.000002C3.0208702,64.000002,0,60.980501,0,57.253901L0,23.004901 2.6718807,20.1855 2.6745014,20.109401 16.677101,5.3964806 16.638101,5.3964806 12.894501,9.3457003 16.816401,5.1914101 16.872401,5.1914101 16.996101,5.0605507 17.007801,5.0605507z"
+                Grid.Column="3" Padding="2" Height="22" Command="{Binding CommandAdd}" CommandParameter="{Binding DataContext.Settings, ElementName=Generator}"/>
+        </Grid>
+        <Expander Grid.Row="1" Header="Settings">
+            <settings:xSettingsEditor x:Name="Generator" DataContext="{Binding GeneratorModel}" Visibility="{Binding DataContext, RelativeSource={RelativeSource Self}, Converter={StaticResource ObjectToVisibility}}"/>
+        </Expander>
+        <local:PagesQueueList Grid.Row="2"/>
+    </Grid>
+</UserControl>

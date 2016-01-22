@@ -1,0 +1,69 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{AA1129B4-A763-4D2A-8A7E-6D82AB7033D3}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Booru.Core</RootNamespace>
+    <AssemblyName>Booru.Core</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.XML" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="BindableBase.cs" />
+    <Compile Include="ConfigurationPair.cs" />
+    <Compile Include="Core.cs" />
+    <Compile Include="DataRecord.cs" />
+    <Compile Include="EditableModuleHelper.cs" />
+    <Compile Include="IPreviewsContainer.cs" />
+    <Compile Include="Loader\IDataLoader.cs" />
+    <Compile Include="Loader\IDataLoaderSource.cs" />
+    <Compile Include="Loader\IDataLoadManager.cs" />
+    <Compile Include="Loader\IDataLoadTaskData.cs" />
+    <Compile Include="IDataParser.cs" />
+    <Compile Include="IDataContainer.cs" />
+    <Compile Include="IDownloadTask.cs" />
+    <Compile Include="IModule.cs" />
+    <Compile Include="IPageGenerator.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SortedItems.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Booru.Core.Utils\Booru.Core.Utils.csproj">
+      <Project>{e87fe50c-d466-4704-be2e-cbd00b1f526e}</Project>
+      <Name>Booru.Core.Utils</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

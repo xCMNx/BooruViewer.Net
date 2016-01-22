@@ -1,0 +1,53 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+		xmlns:Ui="clr-namespace:Booru.Ui;assembly=Booru.Ui"
+		xmlns:conv="clr-namespace:Booru.Ui.Converters;assembly=Booru.Ui"
+		xmlns:local="clr-namespace:BooruViewer"
+        xmlns:core="clr-namespace:Booru.Core;assembly=Booru.Core"
+		xmlns:sys="clr-namespace:System;assembly=mscorlib"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"  
+        xmlns:ie="http://schemas.microsoft.com/expression/2010/interactions"
+		x:Name="mainWindow" x:Class="BooruViewer.MainWindow"
+        xmlns:ctrl="clr-namespace:BooruViewer.Controls"
+        xmlns:views="clr-namespace:BooruViewer.Views"
+        Title="BooruViewer .net" Height="500" Width="800" WindowStartupLocation="CenterScreen" Closing="Window_Closing_1" DataContext="{Binding Source={x:Static local:StaticData.Main}}">
+    <Window.Resources>
+
+        <ResourceDictionary>
+            <Style x:Key="SettingsBtn" TargetType="{x:Type CheckBox}">
+                <Style.Triggers>
+                    <Trigger Property="IsMouseOver" Value="True">
+                        <Trigger.EnterActions>
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <ThicknessAnimation Duration="0:0:0.2" Storyboard.TargetProperty="Margin" To="0"/>
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </Trigger.EnterActions>
+                        <Trigger.ExitActions>
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <ThicknessAnimation Duration="0:0:1" Storyboard.TargetProperty="Margin"/>
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </Trigger.ExitActions>
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
+
+        </ResourceDictionary>
+    </Window.Resources>
+    <Grid>
+        <TabControl>
+            <TabItem Header="List">
+                <views:List/>
+            </TabItem>
+            <TabItem Header="TabItem">
+                <views:PagesQueue/>
+            </TabItem>
+        </TabControl>
+        <local:SettingsControl Grid.Row="1" Visibility="{Binding IsChecked, Converter={StaticResource BoolToVisibility}, ElementName=cbSettings}"/>
+        <Ui:CheckBox Style="{StaticResource SettingsBtn}" x:Name="cbSettings" Width="40" Height="40" Margin="0,-15,-15,0" VerticalAlignment="Top" HorizontalAlignment="Right" GlyphData="{StaticResource icoSettings_Data}"/>
+    </Grid>
+</Window>

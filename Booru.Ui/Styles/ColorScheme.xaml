@@ -1,0 +1,50 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+					xmlns:sys="clr-namespace:System;assembly=mscorlib">
+
+    <SolidColorBrush x:Key="CheckBox.Glyph.Color">#FFFFFFFF</SolidColorBrush>
+    <SolidColorBrush x:Key="CheckBox.Elipse.Border">#88464646</SolidColorBrush>
+    <SolidColorBrush x:Key="CheckBox.Elipse.Background">#7F8B8B8B</SolidColorBrush>
+
+    <SolidColorBrush x:Key="RadioButton.Glyph.Color">#FFFFFFFF</SolidColorBrush>
+    <SolidColorBrush x:Key="RadioButton.Elipse.Border">#88464646</SolidColorBrush>
+    <SolidColorBrush x:Key="RadioButton.Elipse.Background">#7F8B8B8B</SolidColorBrush>
+
+    <SolidColorBrush x:Key="ComboBox.Border.Color">#88464646</SolidColorBrush>
+    <SolidColorBrush x:Key="ComboBox.Background.Color.Hover">#998B8B8B</SolidColorBrush>
+    <SolidColorBrush x:Key="ComboBox.Background.Color">#7F8B8B8B</SolidColorBrush>
+
+    <SolidColorBrush x:Key="Button.Text">#FFE6E6E6</SolidColorBrush>
+    <SolidColorBrush x:Key="Button.Text.Pressed">#FF999999</SolidColorBrush>
+
+    <SolidColorBrush x:Key="TextBox.Text">#FFE6E6E6</SolidColorBrush>
+    <SolidColorBrush x:Key="TextBox.Background">#FF888888</SolidColorBrush>
+    <SolidColorBrush x:Key="TextBox.Border">#88464646</SolidColorBrush>
+    <SolidColorBrush x:Key="TextBox.Border.Highlight">#BB464646</SolidColorBrush>
+
+    <SolidColorBrush x:Key="Window.Background">#FF747474</SolidColorBrush>
+    <SolidColorBrush x:Key="Window.Foreground">#FFE6E6E6</SolidColorBrush>
+    <SolidColorBrush x:Key="Text.Color">#FFE6E6E6</SolidColorBrush>
+
+    <SolidColorBrush x:Key="Button.Foreground">#FF8B8B8B</SolidColorBrush> 
+    <SolidColorBrush x:Key="Button.Foreground.Over">#FF8B8B8B</SolidColorBrush>
+    <SolidColorBrush x:Key="Button.Foreground.Disabled">#FF838383</SolidColorBrush>
+    <SolidColorBrush x:Key="Button.Background">#FFBBBBBB</SolidColorBrush> 
+    <SolidColorBrush x:Key="Button.Background.Over">#FF999999</SolidColorBrush>
+    <SolidColorBrush x:Key="Button.Background.Pressed">#FFDDDDDD</SolidColorBrush>
+    <SolidColorBrush x:Key="Button.Background.Disabled">#FF747474</SolidColorBrush>
+
+
+    <LinearGradientBrush x:Key="TopToBottomLines" EndPoint="0,4" StartPoint="4,0" MappingMode="Absolute" SpreadMethod="Repeat">
+        <GradientStop Color="#FFE6E6E6" Offset="0" />
+        <GradientStop Color="#FFE6E6E6" Offset="0.3" />
+        <GradientStop Color="Transparent" Offset="0.3" />
+        <GradientStop Color="Transparent" Offset="1" />
+    </LinearGradientBrush>
+
+    <sys:Double x:Key="MenuElementTextSize">18</sys:Double>
+    <GridLength x:Key="MenuElementGlyphSize">35</GridLength>
+
+    <sys:Double x:Key="TextSize">14</sys:Double>
+
+</ResourceDictionary>

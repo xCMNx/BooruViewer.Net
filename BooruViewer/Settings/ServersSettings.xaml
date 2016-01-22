@@ -1,0 +1,73 @@
+﻿<Grid x:Class="BooruViewer.Settings.ServersSettings"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:BooruViewer.Settings"
+             xmlns:ctrl="clr-namespace:BooruViewer.Controls"
+             xmlns:core="clr-namespace:Booru.Core;assembly=Booru.Core"
+             xmlns:ui="clr-namespace:Booru.Ui;assembly=Booru.Ui"
+             xmlns:tmpl="clr-namespace:Booru.Base;assembly=Booru.Base"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+    <Grid.RowDefinitions>
+        <RowDefinition Height="Auto"/>
+        <RowDefinition Height="*"/>
+    </Grid.RowDefinitions>
+    <Grid Grid.Row="0">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="Auto"/>
+        </Grid.ColumnDefinitions>
+        <ComboBox Grid.Column="0" SelectedItem="{Binding SelectedSettings, Mode=TwoWay}" IsEnabled="{Binding IsEdited, Converter={StaticResource BoolInvert}}" x:Name="Servers" ItemsSource="{Binding Source={x:Static tmpl:Templates.List}}" DisplayMemberPath="Server" SelectedValuePath="Server"/>
+        <ui:GlyphButton x:Name="btnDelete" 
+            GlyphData="M33.977998,27.684L33.977998,58.102997 41.373998,58.102997 41.373998,27.684z M14.841999,27.684L14.841999,58.102997 22.237998,58.102997 22.237998,27.684z M4.0319996,22.433001L52.183,22.433001 52.183,63.999001 4.0319996,63.999001z M15.974,0L40.195001,0 40.195001,7.7260003 56.167001,7.7260003 56.167001,16.000999 0,16.000999 0,7.7260003 15.974,7.7260003z"
+            Width="30" Grid.Column="1" Padding="4" Command="{Binding DeleteCommand}"/>
+
+        <ui:GlyphButton 
+            x:Name="btnNew"
+            GlyphData="M9.3440921,4.0100005L11.916929,4.0100005 11.916929,9.4114404 17.318,9.4114404 17.318,11.984521 11.916929,11.984521 11.916929,17.386002 9.3440921,17.386002 9.3440921,11.984521 3.9430002,11.984521 3.9430002,9.4114404 9.3440921,9.4114404z M10.66645,2.0872412C5.9269768,2.0872411 2.0857208,5.9282988 2.0857207,10.6665 2.0857208,15.404711 5.9269768,19.245839 10.66645,19.245839 15.403383,19.245839 19.24453,15.404711 19.24453,10.6665 19.24453,5.9282988 15.403383,2.0872411 10.66645,2.0872412z M10.66645,0C16.546468,0 21.333001,4.7851903 21.333001,10.6665 21.333001,16.54789 16.546468,21.333 10.66645,21.333 4.7837429,21.333 0,16.54789 0,10.6665 0,4.7851903 4.7837429,0 10.66645,0z"
+            Width="30" Grid.Column="2" Padding="0" Visibility="{Binding SelectedSettings, Converter={StaticResource ObjectToVisibility}}" Command="{Binding NewCommand}"/>
+
+    </Grid>
+    <ScrollViewer Grid.Row="1">
+        <StackPanel>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Label Content="Url:" Grid.Row="0" VerticalAlignment="Center" Grid.Column="0" Visibility="{Binding SelectedSettings, Converter={StaticResource ObjectToVisibilityCI}}"/>
+                <TextBox Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" Text="{Binding Url, Mode=TwoWay}" Visibility="{Binding SelectedSettings, Converter={StaticResource ObjectToVisibilityCI}}"/>
+                <Label Content="Preview mask:" VerticalAlignment="Center" Grid.Row="1" Grid.Column="0"/>
+                <TextBox Grid.Row="1" VerticalAlignment="Center" Text="{Binding PreviewMask, Mode=TwoWay}" Grid.Column="1"/>
+                <Label Content="File mask:" VerticalAlignment="Center" Grid.Row="2" Grid.Column="0"/>
+                <TextBox Grid.Row="2" VerticalAlignment="Center" Text="{Binding FileMask, Mode=TwoWay}" Grid.Column="1"/>
+            </Grid>
+            <GroupBox Header="Parser">
+                <local:xSettingsEditor DataContext="{Binding ParserModel}"/>
+            </GroupBox>
+            <GroupBox Header="Page generator">
+                <local:xSettingsEditor DataContext="{Binding GeneratorModel}"/>
+            </GroupBox>
+            <ui:GlyphButton x:Name="btnTest" Command="{Binding CommandTest}"
+                    GlyphData="M4.5534029,5.339L5.7304158,6.3220834C2.9856761,6.8492941 1.3332903,7.7958086 1.3332902,8.4976962 1.3332903,9.5211191 4.8567386,11.070643 10.166451,11.070643 15.476472,11.070643 18.99962,9.5211191 18.99962,8.4976962 18.99962,7.7958086 17.347445,6.8492941 14.602685,6.3220834L15.781067,5.3401595C18.523228,6.1461763 20.333,7.5237827 20.333,9.0900962 20.333,11.575735 15.781067,13.59 10.166451,13.59 4.552053,13.59 0,11.575735 0,9.0900962 0,7.5237827 1.8099433,6.1449561 4.5534029,5.339z M8.6325836,0L11.700517,0 11.700517,4.7770804 14.789001,4.7770804 10.166475,8.6310005 5.5440001,4.7770804 8.6325836,4.7770804z">
+                    <TextBlock Text="Test" VerticalAlignment="Center" Margin="5"/>
+            </ui:GlyphButton>
+        </StackPanel>
+    </ScrollViewer>
+    <Border Visibility="{Binding CommandTest.IsExecuting, Converter={StaticResource BoolToVisibility}}" Grid.RowSpan="2">
+        <Grid>
+            <ctrl:WaitPanel Height="100" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+            <ui:GlyphButton Height="40" Width="40" Command="{Binding CommandTestCancel}"
+                            VerticalAlignment="Center" HorizontalAlignment="Center"
+                                    GlyphData="M4.5534029,5.339L5.7304158,6.3220834C2.9856761,6.8492941 1.3332903,7.7958086 1.3332902,8.4976962 1.3332903,9.5211191 4.8567386,11.070643 10.166451,11.070643 15.476472,11.070643 18.99962,9.5211191 18.99962,8.4976962 18.99962,7.7958086 17.347445,6.8492941 14.602685,6.3220834L15.781067,5.3401595C18.523228,6.1461763 20.333,7.5237827 20.333,9.0900962 20.333,11.575735 15.781067,13.59 10.166451,13.59 4.552053,13.59 0,11.575735 0,9.0900962 0,7.5237827 1.8099433,6.1449561 4.5534029,5.339z M8.6325836,0L11.700517,0 11.700517,4.7770804 14.789001,4.7770804 10.166475,8.6310005 5.5440001,4.7770804 8.6325836,4.7770804z"/>
+        </Grid>
+    </Border>
+</Grid>
